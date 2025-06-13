@@ -2,20 +2,22 @@ BITS 64
 
 global _start
 
-segment .bss
+section .bss
     struc sockaddr
         sin_family: resw 1
         sin_port: resw 1
         sin_addr: resd 1
     endstruc
-segment .rodata
+
+section .data
     sockaddr_struct_init:
         istruc sockaddr
             at sin_family, dw 0x2
             at sin_port, dw 0x5c11
             at sin_addr, dd 0x100007f
         iend
-segment .text
+
+section .text
 
 _start:
     mov rax, 41
